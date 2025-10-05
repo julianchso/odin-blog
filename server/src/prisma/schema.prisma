@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  userId       String        @id @default(uuid())
+  username     String        @unique
+  hash         String
+  salt         String
+  admin        Boolean
+  posts        Post[]
+  comments     Comment[]
+  postLikes    PostLike[]
+  commentLikes CommentLike[]
+}
+
+model Post {
+  postId     String     @id @default(uuid())
+  title      String
+  userId     String
+  createdAt  DateTime   @default(now())
+  modifiedAt DateTime
+  comments   Comment[]
+  postLikes  PostLike[]
+
+  user User @relation(fields: [userId], references: [userId])
+
+  @@index([userId])
+}
+
+model Comment {
+  commentId    String        @id @default(uuid())
+  userId       String
+  postId       String
+  parentId     String
+  createdAt    DateTime      @default(now())
+  commentLikes CommentLike[]
+
+  user          User      @relation(fields: [userId], references: [userId])
+  post          Post      @relation(fields: [postId], references: [postId], onDelete: Cascade)
+  parentComment Comment?  @relation("commentHierarchy", fields: [parentId], references: [commentId])
+  childComments Comment[] @relation("commentHierarchy")
+
+  @@index([userId])
+  @@index([postId])
+  @@index([parentId])
+}
+
+model PostLike {
+  postLikeId String @id @default(uuid())
+  userId     String
+  postId     String
+  value      Int
+
+  user User @relation(fields: [userId], references: [userId])
+  post Post @relation(fields: [postId], references: [postId])
+
+  @@unique([userId, postId])
+}
+
+model CommentLike {
+  commentLikeId String @id @default(uuid())
+  userId        String
+  commentId     String
+  value         Int
+
+  user    User    @relation(fields: [userId], references: [userId])
+  comment Comment @relation(fields: [commentId], references: [commentId])
+
+  @@unique([userId, commentId])
+}
