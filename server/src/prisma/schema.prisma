@@ -12,25 +12,47 @@ model User {
   username     String        @unique
   hash         String
   salt         String
-  admin        Boolean
+  role         Role          @default(USER)
   posts        Post[]
   comments     Comment[]
   postLikes    PostLike[]
   commentLikes CommentLike[]
 }
 
-model Post {
-  postId     String     @id @default(uuid())
-  title      String
-  userId     String
-  createdAt  DateTime   @default(now())
-  modifiedAt DateTime
-  comments   Comment[]
-  postLikes  PostLike[]
+enum Role {
+  USER
+  ADMIN
+}
 
-  user User @relation(fields: [userId], references: [userId])
+enum PostStatus {
+  PUBLISHED
+  DRAFT
+  ARCHIVED
+}
+
+model Post {
+  postId      String     @id @default(uuid())
+  title       String
+  slug        String
+  userId      String
+  categoryId  String
+  content     String
+  publishedAt DateTime   @default(now())
+  modifiedAt  DateTime
+  status      PostStatus
+  comments    Comment[]
+  postLikes   PostLike[]
+
+  user     User         @relation(fields: [userId], references: [userId])
+  category PostCategory @relation(fields: [categoryId], references: [categoryId])
 
   @@index([userId])
+}
+
+model PostCategory {
+  categoryId String @id @default(uuid())
+  name       String
+  Post       Post[]
 }
 
 model Comment {

@@ -3,14 +3,19 @@ import Button from './Button';
 
 function LoginForm() {
   return (
-    <>
-      Login Form Placeholder
-      <Input />
-      <Input />
+    <div className=''>
+      <label htmlFor='username'>
+        Username:
+        <Input id='username' />
+      </label>
+      <label htmlFor='password'>
+        Password:
+        <Input />
+      </label>
       <Button size='md' color='primary'>
         Log In
       </Button>
-    </>
+    </div>
   );
 }
 
