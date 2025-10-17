@@ -13,3 +13,32 @@
 @import 'tailwindcss/theme.css' layer(theme);
 @import 'tailwindcss/preflight.css' layer(base);
 @import 'tailwindcss/utilities.css' layer(utilities);
+
+@layer components {
+  .body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  Button {
+    cursor: pointer;
+  }
+
+  .boxFormContainer {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: solid 1px black;
+    border-radius: 5px;
+  }
+
+  .boxForm {
+    display: flex;
+    flex-direction: column;
+  }
+}

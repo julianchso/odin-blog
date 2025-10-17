@@ -8,7 +8,6 @@ function App() {
       <div className='w-2/3 '>
         <Navbar />
         <Outlet />
-        <h1>blog</h1>
       </div>
     </div>
   );

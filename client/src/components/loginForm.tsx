@@ -3,7 +3,7 @@ import Button from './Button';
 
 function LoginForm() {
   return (
-    <div className=''>
+    <div className='boxForm'>
       <label htmlFor='username'>
         Username:
         <Input id='username' />
@@ -12,7 +12,7 @@ function LoginForm() {
         Password:
         <Input />
       </label>
-      <Button size='md' color='primary'>
+      <Button type='submit' size='md' color='primary'>
         Log In
       </Button>
     </div>

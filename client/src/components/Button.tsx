@@ -19,10 +19,15 @@ type ButtonVariants = VariantProps<typeof button>;
 
 interface ButtonProps extends ButtonVariants {
   children: React.ReactNode;
+  type: React.ReactNode;
 }
 
-function Button({ children, size = 'sm', color = 'primary' }: ButtonProps) {
-  return <button className={button({ size, color })}>{children}</button>;
+function Button({ children, size = 'sm', color = 'primary', type }: ButtonProps) {
+  return (
+    <button type={type} className={button({ size, color })}>
+      {children}
+    </button>
+  );
 }
 
 export default Button;
