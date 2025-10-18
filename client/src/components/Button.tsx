@@ -20,11 +20,18 @@ type ButtonVariants = VariantProps<typeof button>;
 interface ButtonProps extends ButtonVariants {
   children: React.ReactNode;
   type: React.ReactNode;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-function Button({ children, size = 'sm', color = 'primary', type }: ButtonProps) {
+function Button({
+  children,
+  size = 'sm',
+  color = 'primary',
+  type = 'submit',
+  onClick,
+}: ButtonProps) {
   return (
-    <button type={type} className={button({ size, color })}>
+    <button type={type} onClick={onClick} className={button({ size, color })}>
       {children}
     </button>
   );

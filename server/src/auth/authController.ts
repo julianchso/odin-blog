@@ -2,7 +2,7 @@ import { genPassword } from '../utils/passwordUtils';
 import prisma from '../database/prismaClient';
 import { Role } from '@prisma/client';
 
-import type { NextFunction, Request, Response } from 'express';
+import type { Request, Response } from 'express';
 
 const signUpPost = async (req: Request, res: Response) => {
   try {
@@ -20,7 +20,7 @@ const signUpPost = async (req: Request, res: Response) => {
       },
     });
 
-    res.redirect('/login');
+    res.status(200).json({ message: 'User created', user: { username: req.body.username } });
   } catch (err) {
     console.log(err);
   }
