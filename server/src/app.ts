@@ -1,4 +1,6 @@
 import express from 'express';
+import jwt from 'jsonwebtoken';
+const { sign, verify } = jwt;
 import cors from 'cors';
 import bodyParser from 'body-parser';
 // import passport from 'passport';

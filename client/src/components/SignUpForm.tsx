@@ -10,18 +10,6 @@ function SignUpForm() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleUsernameChange = (e: React.FormEvent) => {
-    setUsername((e.target as HTMLInputElement).value);
-  };
-
-  const handlePasswordChange = (e: React.FormEvent) => {
-    setPassword((e.target as HTMLInputElement).value);
-  };
-
-  const handleConfirmPasswordChange = (e: React.FormEvent) => {
-    setConfirmPassword((e.target as HTMLInputElement).value);
-  };
-
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -46,24 +34,35 @@ function SignUpForm() {
   };
 
   return (
-    <form className='boxForm'>
+    <form className='boxForm' onSubmit={handleSignUp}>
       <label htmlFor='username'>
         Username:
-        <Input id='username' value={username} onChange={handleUsernameChange} />
+        <Input
+          id='username'
+          type='text'
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
       </label>
       <label htmlFor='password'>
         Password:
-        <Input id='password' value={password} onChange={handlePasswordChange} />
+        <Input
+          id='username'
+          type='password'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
       </label>
       <label htmlFor='confirmPassword'>
         Retype Password:
         <Input
           id='confirmPassword'
+          type='password'
           value={confirmPassword}
-          onChange={handleConfirmPasswordChange}
+          onChange={(e) => setConfirmPassword(e.target.value)}
         />
       </label>
-      <Button type='submit' size='md' color='primary' onClick={handleSignUp}>
+      <Button type='submit' size='md' color='primary'>
         Sign Up
       </Button>
     </form>

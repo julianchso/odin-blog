@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import passport from 'passport';
 
-import { signUpPost } from './authController';
+import { signUpPost, loginPost } from './authController';
 
 const authRouter = Router();
 
 authRouter.post('/signUp', signUpPost);
-authRouter.post('/login', passport.authenticate('local'), () => {});
+authRouter.post('/login', loginPost);
 
 export default authRouter;
