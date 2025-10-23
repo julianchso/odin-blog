@@ -1,11 +1,13 @@
 import { Router } from 'express';
-import passport from 'passport';
 
-import { signUpPost, loginPost } from './authController';
+import { homeGet, signUpPost, loginPost } from './authController';
+import verifyToken from '../middleware/verifyToken';
 
 const authRouter = Router();
 
 authRouter.post('/signUp', signUpPost);
-authRouter.post('/login', loginPost);
+authRouter.post('/login', verifyToken, loginPost);
+
+authRouter.get('/posts', verifyToken, homeGet);
 
 export default authRouter;

@@ -1,9 +1,6 @@
 import express from 'express';
-import jwt from 'jsonwebtoken';
-const { sign, verify } = jwt;
 import cors from 'cors';
 import bodyParser from 'body-parser';
-// import passport from 'passport';
 import 'dotenv/config';
 import type { Request, Response, NextFunction } from 'express';
 
@@ -21,10 +18,10 @@ app.use((_req: Request, _res: Response, next: NextFunction) => {
   next();
 }, cors({ maxAge: 84600 }));
 
-app.use((req, res, next) => {
-  res.locals.currentUser = req.user;
-  next();
-});
+// app.use((req, res, next) => {
+//   res.locals.currentUser = req.user;
+//   next();
+// });
 
 app.use('/api/auth', authRouter);
 
