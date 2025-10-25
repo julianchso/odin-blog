@@ -7,6 +7,8 @@ import App from './App.tsx';
 import Login from './pages/Login.tsx';
 import Home from './pages/Home.tsx';
 import SignUp from './pages/SignUp.tsx';
+import PostPage from './pages/PostPage.tsx';
+import { AuthProvider } from './components/AuthContext.tsx';
 
 const router = createBrowserRouter([
   {
@@ -16,12 +18,15 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: 'SignUp', element: <SignUp /> },
       { path: 'Login', element: <Login /> },
+      { path: 'posts', element: <PostPage /> },
     ],
   },
 ]);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>
 );

@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 
+import { useAuth } from './AuthContext';
 import Input from './Input';
 import Button from './Button';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const { setIsLoggedIn } = useAuth();
 
   const handleLogIn = async (e: React.FormEvent) => {
-    console.log('login click');
     e.preventDefault();
 
     try {
@@ -24,6 +27,13 @@ function LoginForm() {
 
       const data = await res.json();
       console.log(data);
+      console.log(data.isAuthenticated);
+
+      if (res.status == 200 && data.isAuthenticated == true) {
+        localStorage.setItem('jwt', data.token);
+        setIsLoggedIn(true);
+        navigate('/posts');
+      }
     } catch (err) {
       console.log(err);
     }

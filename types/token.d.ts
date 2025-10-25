@@ -1,7 +1,9 @@
 import 'express';
 
-declare module 'express' {
-  interface Request {
-    token?: string;
+declare global {
+  namespace Express {
+    interface Request {
+      token?: string;
+    }
   }
 }

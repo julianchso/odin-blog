@@ -10,9 +10,11 @@ import { validatePassword } from '../utils/passwordUtils';
 
 configDotenv();
 
-declare module 'express-serve-static-core' {
-  interface Request {
-    token: string | undefined;
+declare global {
+  namespace Express {
+    interface Request {
+      token?: string;
+    }
   }
 }
 
@@ -41,6 +43,7 @@ const loginPost = async (req: Request, res: Response) => {
   try {
     const username = req.body.username;
     const password = req.body.password;
+    let isAuthenticated = false;
 
     const user = await prisma.user.findUnique({
       where: {
@@ -62,25 +65,23 @@ const loginPost = async (req: Request, res: Response) => {
       return res.status(500).json({ error: 'Server misconfiguration: TOKEN_SECRET missing' });
     }
 
-    jwt.sign(
-      { user },
-      process.env.TOKEN_SECRET,
-      { algorithm: 'HS256' },
-      (err: Error | null, token?: string) => {
-        if (err || !token) {
-          console.error('Error signing token: ', err);
-          return res.status(500).json({ error: 'Token generation failed' });
-        }
-        return res
-          .status(200)
-          .json({ message: 'authentication successful', token: { token: token } });
-      }
-    );
+    // generate token
+    const token = jwt.sign({ user }, process.env.TOKEN_SECRET);
+    isAuthenticated = true;
 
-    res.status(200).json({ message: 'Login successful', user: { username: req.body.username } });
+    res.status(200).json({
+      message: 'Login successful',
+      token,
+      isAuthenticated,
+      user: { username: req.body.username },
+    });
   } catch (err) {
     console.log(err);
   }
+};
+
+const logoutPost = (_req: Request, _res: Response) => {
+  localStorage.removeItem('jwt');
 };
 
 const homeGet = (req: Request, res: Response) => {
@@ -108,4 +109,4 @@ const homeGet = (req: Request, res: Response) => {
   );
 };
 
-export { signUpPost, loginPost, homeGet };
+export { signUpPost, loginPost, logoutPost, homeGet };

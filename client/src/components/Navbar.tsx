@@ -1,11 +1,19 @@
-import { NavLink } from 'react-router';
-import { useState } from 'react';
+import { NavLink, useNavigate } from 'react-router';
+
+import { useAuth } from './AuthContext';
 
 function LogInStatus() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const { isLoggedIn, setIsLoggedIn } = useAuth();
+  const navigate = useNavigate();
 
-  if (loggedIn) {
-    return <NavLink to='LogOut'>Logout</NavLink>;
+  const handleLogout = () => {
+    localStorage.removeItem('jwt');
+    setIsLoggedIn(false);
+    navigate('/login');
+  };
+
+  if (isLoggedIn) {
+    return <button onClick={handleLogout}>Logout</button>;
   } else {
     return (
       <div>
