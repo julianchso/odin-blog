@@ -9,6 +9,7 @@ import Home from './pages/Home.tsx';
 import SignUp from './pages/SignUp.tsx';
 import PostPage from './pages/PostPage.tsx';
 import { AuthProvider } from './components/AuthContext.tsx';
+import ProtectedRoute from './hooks/useProtectedRoute.tsx';
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,14 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: 'SignUp', element: <SignUp /> },
       { path: 'Login', element: <Login /> },
-      { path: 'posts', element: <PostPage /> },
+      {
+        path: 'posts',
+        element: (
+          <ProtectedRoute>
+            <PostPage />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 ]);

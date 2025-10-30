@@ -23,7 +23,7 @@ app.use((_req: Request, _res: Response, next: NextFunction) => {
 //   next();
 // });
 
-app.use('/api/auth', authRouter);
+app.use('/api', authRouter);
 
 app.listen(PORT, () => {
   console.log(`express app listening on PORT ${PORT}`);

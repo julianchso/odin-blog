@@ -35,6 +35,10 @@ function Navbar() {
         <NavLink to='/' end>
           Home
         </NavLink>
+        <NavLink to='/posts' end>
+          Posts
+        </NavLink>
+
         {LogInStatus()}
       </nav>
     </div>

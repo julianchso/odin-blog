@@ -15,7 +15,7 @@ function LoginForm() {
     e.preventDefault();
 
     try {
-      const url = 'http://localhost:3000/api/auth/login';
+      const url = 'http://localhost:3000/api/login';
       const res = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

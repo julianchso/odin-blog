@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 interface AuthContextType {
   isLoggedIn: boolean;
@@ -11,12 +11,10 @@ const AuthContext = createContext<AuthContextType>({
 });
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
     const token = localStorage.getItem('jwt');
-    setIsLoggedIn(!!token);
-  }, []);
+    return !!token;
+  });
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>{children}</AuthContext.Provider>

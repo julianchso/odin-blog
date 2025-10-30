@@ -66,7 +66,7 @@ const loginPost = async (req: Request, res: Response) => {
     }
 
     // generate token
-    const token = jwt.sign({ user }, process.env.TOKEN_SECRET);
+    const token = jwt.sign({ user }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
     isAuthenticated = true;
 
     res.status(200).json({
@@ -85,28 +85,30 @@ const logoutPost = (_req: Request, _res: Response) => {
 };
 
 const homeGet = (req: Request, res: Response) => {
-  if (!req.token) {
-    return res.status(500).json({ error: 'token missing' });
+  if (!req.header) {
+    return res.status(500).json({ error: 'token missing (homeGet)' });
   }
 
   if (!process.env.TOKEN_SECRET) {
     return res.status(500).json({ error: 'TOKEN_SECRET missing' });
   }
 
-  jwt.verify(
-    req.token,
-    process.env.TOKEN_SECRET,
-    (err: jwt.VerifyErrors | null, authData: JwtPayload | string | undefined) => {
-      if (err) {
-        res.status(403);
-      } else {
-        res.json({
-          message: 'Authenticated...',
-          authData,
-        });
-      }
-    }
-  );
+  console.log('home page');
+
+  // jwt.verify(
+  //   req.token,
+  //   process.env.TOKEN_SECRET,
+  //   (err: jwt.VerifyErrors | null, authData: JwtPayload | string | undefined) => {
+  //     if (err) {
+  //       res.status(403);
+  //     } else {
+  //       res.json({
+  //         message: 'Authenticated...',
+  //         authData,
+  //       });
+  //     }
+  //   }
+  // );
 };
 
 export { signUpPost, loginPost, logoutPost, homeGet };
