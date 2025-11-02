@@ -86,29 +86,15 @@ const logoutPost = (_req: Request, _res: Response) => {
 
 const homeGet = (req: Request, res: Response) => {
   if (!req.header) {
-    return res.status(500).json({ error: 'token missing (homeGet)' });
+    return res.status(500).json({ error: 'homeGet token missing' });
   }
+  console.log(req.header);
 
   if (!process.env.TOKEN_SECRET) {
     return res.status(500).json({ error: 'TOKEN_SECRET missing' });
   }
 
-  console.log('home page');
-
-  // jwt.verify(
-  //   req.token,
-  //   process.env.TOKEN_SECRET,
-  //   (err: jwt.VerifyErrors | null, authData: JwtPayload | string | undefined) => {
-  //     if (err) {
-  //       res.status(403);
-  //     } else {
-  //       res.json({
-  //         message: 'Authenticated...',
-  //         authData,
-  //       });
-  //     }
-  //   }
-  // );
+  // return res.status(200).json({ message: 'homeGet home page' });
 };
 
 export { signUpPost, loginPost, logoutPost, homeGet };
