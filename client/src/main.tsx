@@ -5,9 +5,8 @@ import './styles/index.css';
 
 import App from './App.tsx';
 import Login from './pages/Login.tsx';
-import Home from './pages/Home.tsx';
 import SignUp from './pages/SignUp.tsx';
-import PostPage from './pages/PostPage.tsx';
+import Main from './pages/MainPage.tsx';
 import { AuthProvider } from './components/AuthContext.tsx';
 import ProtectedRoute from './hooks/useProtectedRoute.tsx';
 
@@ -16,17 +15,17 @@ const router = createBrowserRouter([
     path: '/',
     element: <App />,
     children: [
-      { index: true, element: <Home /> },
+      { index: true, element: <Main /> },
       { path: 'SignUp', element: <SignUp /> },
       { path: 'Login', element: <Login /> },
-      {
-        path: 'posts',
-        element: (
-          <ProtectedRoute>
-            <PostPage />
-          </ProtectedRoute>
-        ),
-      },
+      // {
+      //   path: 'posts',
+      //   element: (
+      //     <ProtectedRoute>
+      //       <PostPage />
+      //     </ProtectedRoute>
+      //   ),
+      // },
     ],
   },
 ]);

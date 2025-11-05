@@ -32,7 +32,7 @@ function LoginForm() {
       if (res.status == 200 && data.isAuthenticated == true) {
         localStorage.setItem('jwt', data.token);
         setIsLoggedIn(true);
-        navigate('/posts');
+        navigate('/');
       }
     } catch (err) {
       console.log(err);

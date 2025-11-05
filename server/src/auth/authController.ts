@@ -7,6 +7,7 @@ import { genPassword } from '../utils/passwordUtils';
 import prisma from '../database/prismaClient';
 import { Role } from '@prisma/client';
 import { validatePassword } from '../utils/passwordUtils';
+import { findAllPosts } from '../posts/posts.repository';
 
 configDotenv();
 
@@ -69,6 +70,7 @@ const loginPost = async (req: Request, res: Response) => {
     const token = jwt.sign({ user }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
     isAuthenticated = true;
 
+    console.log('logged in');
     res.status(200).json({
       message: 'Login successful',
       token,
@@ -80,21 +82,19 @@ const loginPost = async (req: Request, res: Response) => {
   }
 };
 
-const logoutPost = (_req: Request, _res: Response) => {
+const logoutPost = (req: Request, res: Response) => {
+  const user = (req as any).user;
+  console.log('logged out');
   localStorage.removeItem('jwt');
+  return res.status(200).json({ message: 'logged out', user });
 };
 
-const homeGet = (req: Request, res: Response) => {
-  if (!req.header) {
-    return res.status(500).json({ error: 'homeGet token missing' });
-  }
-  console.log(req.header);
+const postsGet = (req: Request, res: Response) => {
+  const data = findAllPosts();
 
-  if (!process.env.TOKEN_SECRET) {
-    return res.status(500).json({ error: 'TOKEN_SECRET missing' });
-  }
-
-  // return res.status(200).json({ message: 'homeGet home page' });
+  const user = (req as any).user;
+  console.log('homeGet');
+  return res.status(200).json({ message: 'Find all posts', data });
 };
 
-export { signUpPost, loginPost, logoutPost, homeGet };
+export { signUpPost, loginPost, logoutPost, postsGet };

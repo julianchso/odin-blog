@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { homeGet, signUpPost, loginPost, logoutPost } from './authController';
+import { signUpPost, loginPost, logoutPost, postsGet } from './authController';
 import verifyToken from '../middleware/verifyToken';
 
 const authRouter = Router();
@@ -9,6 +9,7 @@ authRouter.post('/signUp', signUpPost);
 authRouter.post('/login', loginPost);
 authRouter.post('/logout', logoutPost);
 
-authRouter.get('/posts', verifyToken, homeGet);
+// authRouter.get('/posts', verifyToken, postsGet);
+authRouter.get('/posts', postsGet);
 
 export default authRouter;

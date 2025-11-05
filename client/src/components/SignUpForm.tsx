@@ -14,7 +14,7 @@ function SignUpForm() {
     e.preventDefault();
 
     try {
-      const url = 'http://localhost:3000/api/auth/signup';
+      const url = 'http://localhost:3000/api/signup';
       const res = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
