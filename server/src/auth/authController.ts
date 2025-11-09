@@ -84,7 +84,6 @@ const loginPost = async (req: Request, res: Response) => {
 
 const logoutPost = (req: Request, res: Response) => {
   const user = (req as any).user;
-  console.log('logged out');
   localStorage.removeItem('jwt');
   return res.status(200).json({ message: 'logged out', user });
 };
@@ -93,7 +92,6 @@ const postsGet = (req: Request, res: Response) => {
   const data = findAllPosts();
 
   const user = (req as any).user;
-  console.log('homeGet');
   return res.status(200).json({ message: 'Find all posts', data });
 };
 

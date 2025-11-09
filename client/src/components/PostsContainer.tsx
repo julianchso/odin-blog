@@ -1,11 +1,11 @@
 import SearchBar from './SearchBar';
-import PostForm from './Posts';
+import FeaturedPosts from './FeaturedPosts';
 
 function PostsContainer() {
   return (
     <>
       <SearchBar />
-      <PostForm />
+      <FeaturedPosts />
     </>
   );
 }

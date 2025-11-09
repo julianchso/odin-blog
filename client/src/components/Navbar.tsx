@@ -35,6 +35,9 @@ function Navbar() {
         <NavLink to='/' end>
           Home
         </NavLink>
+        <NavLink to='/newPost' end>
+          New Post
+        </NavLink>
 
         {LogInStatus()}
       </nav>

@@ -1,17 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 type Post = {
-  postId: string;
-  title: string;
-  slug: string;
-  userId: string;
-  categoryId: string;
-  content: string;
-  publishedAt: Date;
-  modifiedAt: Date;
-  status: string;
-  comments: Array<[]>;
-  postLikes: Array<[]>;
+  message: string;
+  data: Post[];
 };
 
 function SearchBar() {
@@ -28,10 +19,9 @@ function SearchBar() {
           headers: { 'Content-Type': 'application/json' },
         });
         console.log(res);
-        const data = await res.json();
+        const json = await res.json();
 
-        console.log(data);
-        setAllPosts(data);
+        setAllPosts(json.data);
       } catch (err) {
         console.error('Fetch error: ', err);
       }
@@ -40,12 +30,15 @@ function SearchBar() {
     fetchPosts();
   }, []);
 
-  useEffect(() => {
-    const filtered = allPosts.filter((post) =>
-      post.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredPosts(filtered);
-  }, [searchTerm, allPosts]);
+  console.log(allPosts);
+
+  // useEffect(() => {
+  //   console.log(allPosts);
+  //   const filtered = allPosts.filter((post) =>
+  //     post.title.toLowerCase().includes(searchTerm.toLowerCase())
+  //   );
+  //   setFilteredPosts(filtered);
+  // }, [searchTerm, allPosts]);
 
   // TODO: fetch post titles from server
 
