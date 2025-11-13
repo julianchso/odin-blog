@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 type Post = {
   message: string;
@@ -43,15 +45,17 @@ function SearchBar() {
   // TODO: fetch post titles from server
 
   return (
-    <>
+    <div className='searchbarContainer'>
       <input
+        className='searchbar'
         type='text'
         placeholder='Search title...'
         onChange={(e) => {
           setSearchTerm(e.target.value);
         }}
       />
-    </>
+      <FontAwesomeIcon icon={faMagnifyingGlass} />
+    </div>
   );
 }
 

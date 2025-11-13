@@ -3,7 +3,7 @@ import Quill from 'quill';
 import QuillEditor from './QuillEditor';
 
 import Button from './Button';
-import styles from '../styles/Quill';
+import '../styles/QuillStyles.css';
 
 function NewPostForm() {
   const Delta = Quill.import('delta');
@@ -59,12 +59,12 @@ function NewPostForm() {
             Get Content Length
           </button>
         </div>
-        <div className={styles.state}>
-          <div className={styles['state-title']}>Current Range:</div>
+        <div className={'state'}>
+          <div className={'state-title'}>Current Range:</div>
           {range ? JSON.stringify(range) : 'Empty'}
         </div>
-        <div className={styles.state}>
-          <div className={styles['state-title']}>Last Change:</div>
+        <div className={'state'}>
+          <div className={'state-title'}>Last Change:</div>
           {lastChange ? JSON.stringify(lastChange.ops) : 'Empty'}
         </div>
         <Button type='submit' size='md' color='primary'>

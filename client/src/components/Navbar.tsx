@@ -13,14 +13,18 @@ function LogInStatus() {
   };
 
   if (isLoggedIn) {
-    return <button onClick={handleLogout}>Logout</button>;
+    return (
+      <button onClick={handleLogout} className='navButton'>
+        Logout
+      </button>
+    );
   } else {
     return (
-      <div>
-        <NavLink to='/SignUp' end>
+      <div className='navContainer'>
+        <NavLink to='/SignUp' end className='navButton'>
           Sign Up
         </NavLink>
-        <NavLink to='/Login' end>
+        <NavLink to='/Login' end className='navButton'>
           Login
         </NavLink>
       </div>
@@ -30,12 +34,12 @@ function LogInStatus() {
 
 function Navbar() {
   return (
-    <div>
+    <div className='navContainer'>
       <nav className='flex justify-between'>
-        <NavLink to='/' end>
+        <NavLink to='/' end className='navButton'>
           Home
         </NavLink>
-        <NavLink to='/newPost' end>
+        <NavLink to='/newPost' end className='navButton'>
           New Post
         </NavLink>
 

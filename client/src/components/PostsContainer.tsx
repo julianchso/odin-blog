@@ -3,10 +3,10 @@ import FeaturedPosts from './FeaturedPosts';
 
 function PostsContainer() {
   return (
-    <>
+    <div>
       <SearchBar />
       <FeaturedPosts />
-    </>
+    </div>
   );
 }
 

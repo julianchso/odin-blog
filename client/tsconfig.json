@@ -16,6 +16,7 @@
 
     /* Linting */
     "strict": true,
+    "jsx": "react",
     "noUnusedLocals": false,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
