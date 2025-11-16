@@ -35,16 +35,16 @@ model Post {
   title       String
   slug        String
   userId      String
-  categoryId  String
-  content     String
+  categoryId  String?
+  content     Json
   publishedAt DateTime   @default(now())
-  modifiedAt  DateTime
+  modifiedAt  DateTime   @default(now())
   status      PostStatus
   comments    Comment[]
   postLikes   PostLike[]
 
-  user     User         @relation(fields: [userId], references: [userId])
-  category PostCategory @relation(fields: [categoryId], references: [categoryId])
+  user     User          @relation(fields: [userId], references: [userId])
+  category PostCategory? @relation(fields: [categoryId], references: [categoryId])
 
   @@index([userId])
 }

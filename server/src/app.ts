@@ -5,6 +5,7 @@ import 'dotenv/config';
 import type { Request, Response, NextFunction } from 'express';
 
 import authRouter from './auth/authRouter';
+import postRouter from './posts/postRouter';
 
 const PORT = process.env.PORT || 3000;
 
@@ -18,12 +19,13 @@ app.use((_req: Request, _res: Response, next: NextFunction) => {
   next();
 }, cors({ maxAge: 84600 }));
 
-// app.use((req, res, next) => {
-//   res.locals.currentUser = req.user;
-//   next();
-// });
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
 
 app.use('/api', authRouter);
+app.use('/api', postRouter);
 
 app.listen(PORT, () => {
   console.log(`express app listening on PORT ${PORT}`);
