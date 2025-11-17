@@ -34,6 +34,7 @@ const QuillEditor = forwardRef<Quill | null, QuillEditorProps>(
     useEffect(() => {
       const container = containerRef.current;
       if (!container) return;
+
       const editorContainer = container.appendChild(
         container.ownerDocument.createElement('article')
       );

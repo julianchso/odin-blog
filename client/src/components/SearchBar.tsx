@@ -20,7 +20,6 @@ function SearchBar() {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
         });
-        console.log(res);
         const json = await res.json();
 
         setAllPosts(json.data);
@@ -31,8 +30,6 @@ function SearchBar() {
 
     fetchPosts();
   }, []);
-
-  console.log(allPosts);
 
   // useEffect(() => {
   //   console.log(allPosts);

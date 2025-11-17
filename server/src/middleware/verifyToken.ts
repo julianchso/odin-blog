@@ -13,6 +13,7 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
   console.log('verifyToken middleware called');
   // Get auth header value
   const bearerHeader = req.headers['authorization'];
+  console.log(`bearer: ${bearerHeader}`);
 
   if (!bearerHeader) {
     return res.status(401).json({ error: 'token missing verify token' });

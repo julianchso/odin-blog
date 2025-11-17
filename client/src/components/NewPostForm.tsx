@@ -1,27 +1,35 @@
 import React, { useRef, useState } from 'react';
-import Quill from 'quill';
+import Quill, { Delta } from 'quill';
 import QuillEditor from './QuillEditor';
 
 import Button from './Button';
 import '../styles/QuillStyles.css';
+import { fetchWithAuth } from '../services/auth';
 
 function NewPostForm() {
   const Delta = Quill.import('delta');
+  const [title, setTitle] = useState('');
   const [range, setRange] = useState();
   const [lastChange, setLastChange] = useState();
   const [readOnly, setReadOnly] = useState(false);
-  const quillRef = useRef();
+  const quillRef = useRef<Quill | null>();
 
   const handleNewPost = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!quillRef.current) return;
+
+    const delta = quillRef.current.getContents();
+
+    console.log(delta);
 
     try {
-      const url = 'http://localhost:3000/api/newPost';
-      const res = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({}),
-      });
+      fetchWithAuth('http://localhost:3000/api/posts/newPost');
+      // const url = 'http://localhost:3000/api/newPost';
+      // const res = await fetch(url, {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ title, content: delta }),
+      // });
     } catch (err) {
       console.error('Fetch error: ', err);
     }
@@ -30,14 +38,14 @@ function NewPostForm() {
   return (
     <section>
       <form onSubmit={handleNewPost}>
+        <label htmlFor='title'>
+          Title:
+          <input type='text' name='title' onChange={(e) => setTitle(e.target.value)} />
+        </label>
         <QuillEditor
           ref={quillRef}
           readOnly={readOnly}
-          defaultValue={new Delta()
-            .insert('Title')
-            .insert('\n', { header: 1 })
-            .insert('Content')
-            .insert('\n')}
+          defaultValue={new Delta()}
           onSelectionChange={setRange}
           onTextChange={setLastChange}
         />

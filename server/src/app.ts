@@ -19,13 +19,14 @@ app.use((_req: Request, _res: Response, next: NextFunction) => {
   next();
 }, cors({ maxAge: 84600 }));
 
-app.use((req, res, next) => {
+app.use('/api', authRouter);
+app.use('/api/posts', postRouter);
+
+app.use((req, res: Response, next: NextFunction) => {
+  console.log(req.user);
   res.locals.currentUser = req.user;
   next();
 });
-
-app.use('/api', authRouter);
-app.use('/api', postRouter);
 
 app.listen(PORT, () => {
   console.log(`express app listening on PORT ${PORT}`);

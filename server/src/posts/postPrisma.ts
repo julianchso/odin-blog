@@ -1,9 +1,8 @@
 import { PostStatus } from '@prisma/client';
 import prisma from '../database/prismaClient';
-import { Delta } from 'quill';
 import { JsonObject } from '@prisma/client/runtime/library';
 
-const createPost = async (
+const createPostPrisma = async (
   title: string,
   slug: string,
   userId: string,
@@ -20,3 +19,5 @@ const createPost = async (
     },
   });
 };
+
+export { createPostPrisma };

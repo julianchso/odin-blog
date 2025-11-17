@@ -1,7 +1,6 @@
 import { Router } from 'express';
 
 import { signUpPost, loginPost, logoutPost, postsGet } from './authController';
-import verifyToken from '../middleware/verifyToken';
 
 const authRouter = Router();
 

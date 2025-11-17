@@ -66,8 +66,14 @@ const loginPost = async (req: Request, res: Response) => {
       return res.status(500).json({ error: 'Server misconfiguration: TOKEN_SECRET missing' });
     }
 
+    const tokenPayload = {
+      userId: user.userId,
+      username: user.username,
+      role: user.role,
+    };
+
     // generate token
-    const token = jwt.sign({ user }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ tokenPayload }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
     isAuthenticated = true;
 
     console.log('logged in');
