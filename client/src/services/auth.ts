@@ -1,6 +1,6 @@
 export async function fetchWithAuth(url: string, options: RequestInit = {}) {
   const token = localStorage.getItem('jwt');
-  console.log(token);
+  console.log(`fetchWithAuth: ${token}`);
 
   const headers = {
     ...options.headers,
@@ -14,5 +14,9 @@ export async function fetchWithAuth(url: string, options: RequestInit = {}) {
     throw new Error('Unauthorized or network error');
   }
 
-  return res.json();
+  const data = await res.json();
+
+  console.log(data);
+
+  return data;
 }

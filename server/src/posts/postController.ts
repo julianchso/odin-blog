@@ -6,10 +6,10 @@ const newPostsPost = async (req: Request, res: Response) => {
   const user = res.locals.currentUser;
   console.log(user);
 
-  const data = req.body;
   const title = req.body.title;
   const content = req.body.content;
-  const userId = res.locals.currentUser.id;
+  const userId = res.locals.currentUser.tokenPayload.userId;
+  console.log(userId);
 
   const hyphenTitle = title.replace(/\s+/g, '-');
   const status = 'PUBLISHED';

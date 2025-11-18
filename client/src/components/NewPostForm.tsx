@@ -23,13 +23,14 @@ function NewPostForm() {
     console.log(delta);
 
     try {
-      fetchWithAuth('http://localhost:3000/api/posts/newPost');
-      // const url = 'http://localhost:3000/api/newPost';
-      // const res = await fetch(url, {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ title, content: delta }),
-      // });
+      const options = {
+        method: 'POST',
+        body: JSON.stringify({ title, content: delta }),
+      };
+
+      const res = await fetchWithAuth('http://localhost:3000/api/posts/newPost', options);
+      const data = await res.json();
+      console.log(data);
     } catch (err) {
       console.error('Fetch error: ', err);
     }

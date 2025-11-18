@@ -23,7 +23,8 @@ app.use('/api', authRouter);
 app.use('/api/posts', postRouter);
 
 app.use((req, res: Response, next: NextFunction) => {
-  console.log(req.user);
+  console.log('app user middleware called');
+  console.log(`app use req.user: ${req.user}`);
   res.locals.currentUser = req.user;
   next();
 });
