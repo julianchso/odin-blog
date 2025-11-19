@@ -35,7 +35,6 @@ model Post {
   title       String
   slug        String
   userId      String
-  categoryId  String?
   content     Json
   publishedAt DateTime   @default(now())
   modifiedAt  DateTime   @default(now())
@@ -43,16 +42,17 @@ model Post {
   comments    Comment[]
   postLikes   PostLike[]
 
-  user     User          @relation(fields: [userId], references: [userId])
-  category PostCategory? @relation(fields: [categoryId], references: [categoryId])
+  user       User           @relation(fields: [userId], references: [userId])
+  categories PostCategory[]
 
   @@index([userId])
 }
 
 model PostCategory {
   categoryId String @id @default(uuid())
+  postId     String
   name       String
-  Post       Post[]
+  posts      Post[]
 }
 
 model Comment {
