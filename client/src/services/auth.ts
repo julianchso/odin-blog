@@ -1,6 +1,5 @@
 export async function fetchWithAuth(url: string, options: RequestInit = {}) {
   const token = localStorage.getItem('jwt');
-  console.log(`fetchWithAuth: ${token}`);
 
   const headers = {
     ...options.headers,

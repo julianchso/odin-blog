@@ -10,10 +10,8 @@ declare global {
 }
 
 const verifyToken = (req: Request, res: Response, next: NextFunction) => {
-  console.log('verifyToken middleware called');
   // Get auth header value
   const bearerHeader = req.headers['authorization'];
-  console.log(`bearer: ${bearerHeader}`);
 
   if (!bearerHeader) {
     return res.status(401).json({ error: 'token missing verify token' });
@@ -31,7 +29,6 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
       return res.status(403).json({ message: 'Invalid or expired token' });
     }
     (req as any).user = decoded;
-    console.log(req.user);
     next();
   });
 };

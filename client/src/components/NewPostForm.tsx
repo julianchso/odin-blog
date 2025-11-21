@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useNavigate } from 'react-router';
 import Quill, { Delta } from 'quill';
 import QuillEditor from './QuillEditor';
 
@@ -13,6 +14,7 @@ function NewPostForm() {
   const [lastChange, setLastChange] = useState();
   const [readOnly, setReadOnly] = useState(false);
   const quillRef = useRef<Quill | null>();
+  const navigate = useNavigate();
 
   const handleNewPost = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,17 +22,18 @@ function NewPostForm() {
 
     const delta = quillRef.current.getContents();
 
-    console.log(delta);
-
     try {
       const options = {
         method: 'POST',
         body: JSON.stringify({ title, content: delta }),
       };
 
-      const res = await fetchWithAuth('http://localhost:3000/api/posts/newPost', options);
-      const data = await res.json();
+      const data = await fetchWithAuth('http://localhost:3000/api/posts/newPost', options);
       console.log(data);
+
+      if (data) {
+        navigate('/');
+      }
     } catch (err) {
       console.error('Fetch error: ', err);
     }

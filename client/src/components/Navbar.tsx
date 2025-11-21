@@ -14,13 +14,18 @@ function LogInStatus() {
 
   if (isLoggedIn) {
     return (
-      <button onClick={handleLogout} className='navButton'>
-        Logout
-      </button>
+      <>
+        <NavLink to='/newPost' end className='navButton'>
+          New Post
+        </NavLink>
+        <button onClick={handleLogout} className='navButton'>
+          Logout
+        </button>
+      </>
     );
   } else {
     return (
-      <div className='navContainer'>
+      <div>
         <NavLink to='/SignUp' end className='navButton'>
           Sign Up
         </NavLink>
@@ -39,10 +44,6 @@ function Navbar() {
         <NavLink to='/' end className='navButton'>
           Home
         </NavLink>
-        <NavLink to='/newPost' end className='navButton'>
-          New Post
-        </NavLink>
-
         {LogInStatus()}
       </nav>
     </div>
