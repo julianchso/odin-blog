@@ -20,4 +20,8 @@ const createPostPrisma = async (
   });
 };
 
-export { createPostPrisma };
+const getAllPostsPrisma = async () => {
+  return await prisma.post.findMany();
+};
+
+export { createPostPrisma, getAllPostsPrisma };

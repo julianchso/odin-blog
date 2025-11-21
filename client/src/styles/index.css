@@ -82,4 +82,14 @@
     padding: 5px 10px;
     border-radius: 5px;
   }
+
+  .postContainer {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .post {
+    display: grid;
+  }
 }

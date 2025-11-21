@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 
-import { createPostPrisma } from './postPrisma';
+import { createPostPrisma, getAllPostsPrisma } from './postPrisma';
 
 const newPostsPost = async (req: Request, res: Response) => {
   const user = res.locals.currentUser;
@@ -27,4 +27,16 @@ const newPostsPost = async (req: Request, res: Response) => {
   }
 };
 
-export { newPostsPost };
+const AllPostsGet = async (_req: Request, res: Response) => {
+  try {
+    const data = await getAllPostsPrisma();
+    return res.status(201).json({
+      message: 'Get all posts',
+      data: data,
+    });
+  } catch (err) {
+    return res.status(500).json({ error: 'Failed to get all posts' });
+  }
+};
+
+export { newPostsPost, AllPostsGet };
