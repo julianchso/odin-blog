@@ -9,6 +9,7 @@ import SignUp from './pages/SignUp.tsx';
 import Main from './pages/MainPage.tsx';
 import NewPostPage from './pages/NewPost.tsx';
 import PostPages from './pages/PostsPage.tsx';
+import PostDetailPage from './pages/PostDetailPage.tsx';
 import { AuthProvider } from './components/AuthContext.tsx';
 // import ProtectedRoute from './hooks/useProtectedRoute.tsx';
 
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
       { path: 'Login', element: <Login /> },
       { path: 'NewPost', element: <NewPostPage /> },
       { path: 'Posts', element: <PostPages /> },
+      { path: 'Posts/:postId', element: <PostDetailPage /> },
     ],
   },
 ]);

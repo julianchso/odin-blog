@@ -1,6 +1,11 @@
 import type { Request, Response } from 'express';
 
-import { createPostPrisma, getAllPostsPrisma } from './postPrisma';
+import {
+  createPostPrisma,
+  getAllPostsPrisma,
+  getPostDetailPrisma,
+  getUsernameFromId,
+} from './postPrisma';
 
 const newPostsPost = async (req: Request, res: Response) => {
   const user = res.locals.currentUser;
@@ -39,4 +44,18 @@ const AllPostsGet = async (_req: Request, res: Response) => {
   }
 };
 
-export { newPostsPost, AllPostsGet };
+const PostDetailGet = async (req: Request, res: Response) => {
+  try {
+    const { postId } = req.params;
+    const data = await getPostDetailPrisma(postId);
+    console.log(data);
+    return res.status(201).json({
+      message: 'Get post detail',
+      data: data,
+    });
+  } catch (err) {
+    return res.status(500).json({ error: 'Failed to get post detail' });
+  }
+};
+
+export { newPostsPost, AllPostsGet, PostDetailGet };

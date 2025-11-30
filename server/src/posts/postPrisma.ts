@@ -21,7 +21,34 @@ const createPostPrisma = async (
 };
 
 const getAllPostsPrisma = async () => {
-  return await prisma.post.findMany();
+  return await prisma.post.findMany({
+    include: {
+      user: {
+        select: { username: true },
+      },
+    },
+  });
 };
 
-export { createPostPrisma, getAllPostsPrisma };
+const getPostDetailPrisma = async (postId: string) => {
+  return await prisma.post.findUnique({
+    where: {
+      postId: postId,
+    },
+    include: {
+      user: {
+        select: { username: true },
+      },
+    },
+  });
+};
+
+const getUsernameFromId = async (userId: string) => {
+  return await prisma.user.findUnique({
+    where: {
+      userId: userId,
+    },
+  });
+};
+
+export { createPostPrisma, getAllPostsPrisma, getPostDetailPrisma, getUsernameFromId };

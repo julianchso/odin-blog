@@ -1,6 +1,5 @@
 import '../styles/index.css';
 
-// function Post(title: string, author: string, content: string) {
 interface PostProps {
   title: string;
   author: string;
