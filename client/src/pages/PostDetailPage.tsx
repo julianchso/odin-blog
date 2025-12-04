@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-
 import DeltaOperation from 'quill';
+
+import FormatDateToNow from '../utils/formatDateToNow';
 
 interface AllPostsProps {
   postId: string;
@@ -9,8 +10,8 @@ interface AllPostsProps {
   status: 'PUBLISHED' | 'DRAFT';
   userId: string;
   user: { username: string };
-  publishedAt: string;
-  modifiedAt: string;
+  publishedAt: Date;
+  modifiedAt: Date;
   content: { ops: DeltaOperation[] };
 }
 
@@ -31,9 +32,15 @@ function PostDetailPage() {
 
   return (
     <div>
-      <h1>{post.title}</h1>
-      <p>{post.user.username}</p>
-      <div>{JSON.stringify(post.content.ops)}</div>
+      <div className='post__title'>{post.title}</div>
+      <div className='post__username'>{post.user.username}</div>
+      <div className='post__publishedAt'>
+        PUBLISHED <FormatDateToNow dateTime={post.publishedAt} />
+      </div>
+      <div className='post__publishedAt'>
+        UPDATED <FormatDateToNow dateTime={post.modifiedAt} />
+      </div>
+      <div className='post__content'>{JSON.stringify(post.content.ops)}</div>
     </div>
   );
 }

@@ -29,8 +29,6 @@ function PostPagesContainer() {
           headers: { 'Content-Type': 'application/json' },
         });
         const json = await res.json();
-        console.log(json);
-
         setAllPosts(json.data);
       } catch (err) {
         console.error('Fetch error: ', err);

@@ -3,17 +3,16 @@ import '../styles/index.css';
 interface PostProps {
   title: string;
   author: string;
-  // content?: object;
   content?: string;
 }
 
 function Post({ title, author, content }: PostProps) {
   return (
     <>
-      <div className='post'>
-        <div className='post__title'>{title}</div>
-        <div className='post__author'>{author}</div>
-        <div className='post__content'>{content}</div>
+      <div className='post_Ctn'>
+        <div className='post_Ctn__title'>{title}</div>
+        <div className='post_Ctn__author'>{author}</div>
+        <div className='post_Ctn__content'>{content}</div>
       </div>
     </>
   );

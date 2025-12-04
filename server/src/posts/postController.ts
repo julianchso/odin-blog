@@ -48,7 +48,6 @@ const PostDetailGet = async (req: Request, res: Response) => {
   try {
     const { postId } = req.params;
     const data = await getPostDetailPrisma(postId);
-    console.log(data);
     return res.status(201).json({
       message: 'Get post detail',
       data: data,

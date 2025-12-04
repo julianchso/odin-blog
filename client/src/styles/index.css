@@ -89,7 +89,14 @@
     grid-template-columns: 1fr;
   }
 
-  .post {
+  .post_Ctn {
     display: grid;
+  }
+
+  .post__title {
+    font-size: 26px;
+  }
+
+  .post__username {
   }
 }

@@ -26,8 +26,6 @@ function LoginForm() {
       });
 
       const data = await res.json();
-      console.log(data);
-      console.log(data.isAuthenticated);
 
       if (res.status == 200 && data.isAuthenticated == true) {
         localStorage.setItem('jwt', data.token);
