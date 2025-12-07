@@ -43,11 +43,7 @@ function PostPagesContainer() {
       <div className='postContainer'>
         {AllPosts.map((post) => (
           <button key={post.postId} onClick={() => navigate(`/posts/${post.postId}`)}>
-            <Post
-              title={post.title}
-              author={post.user.username}
-              content={JSON.stringify(post.content.ops)}
-            />
+            <Post title={post.title} author={post.user.username} content={post.content} />
           </button>
         ))}
       </div>

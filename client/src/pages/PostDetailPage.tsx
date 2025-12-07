@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import DeltaOperation from 'quill';
 
 import FormatDateToNow from '../utils/formatDateToNow';
+import BlogContent from '../utils/BlogContent';
 
 interface AllPostsProps {
   postId: string;
@@ -40,7 +41,9 @@ function PostDetailPage() {
       <div className='post__publishedAt'>
         UPDATED <FormatDateToNow dateTime={post.modifiedAt} />
       </div>
-      <div className='post__content'>{JSON.stringify(post.content.ops)}</div>
+      <div className='post__content'>
+        <BlogContent content={post.content} />
+      </div>
     </div>
   );
 }
