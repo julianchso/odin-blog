@@ -98,7 +98,17 @@
     border-radius: 5px;
   }
 
+  .post_Ctn__title {
+    font-weight: bold;
+  }
+
+  .post_Ctn__author {
+    color: #444444;
+    font-style: italic;
+  }
+
   .blog-content > p {
+    font-size: 0.8rem;
     text-align: left;
   }
 

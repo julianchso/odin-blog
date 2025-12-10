@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import DeltaOperation from 'quill';
 
 import Post from './Post';
+import SearchBar from './SearchBar';
 import '../styles/index.css';
 
 interface AllPostsProps {
@@ -17,7 +18,14 @@ interface AllPostsProps {
 }
 
 function PostPagesContainer() {
-  const [AllPosts, setAllPosts] = useState<AllPostsProps[]>([]);
+  const [allPosts, setAllPosts] = useState<AllPostsProps[]>([]);
+  const [query, setQuery] = useState('');
+
+  const filteredPosts = allPosts.filter((item) => {
+    return item.title.toLowerCase().includes(query.toLowerCase());
+    // return item.title.toLowerCase().includes(query.toLowerCase()) || item.content.ops.toLowerCase().includes(query.toLowerCase());
+  });
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,10 +46,15 @@ function PostPagesContainer() {
     fetchAllPosts();
   }, []);
 
+  useEffect(() => {
+    console.log(filteredPosts);
+  }, [filteredPosts]);
+
   return (
     <>
       <div className='postContainer'>
-        {AllPosts.map((post) => (
+        <SearchBar query={query} setQuery={setQuery} />
+        {filteredPosts.map((post) => (
           <button key={post.postId} onClick={() => navigate(`/posts/${post.postId}`)}>
             <Post title={post.title} author={post.user.username} content={post.content} />
           </button>
